@@ -13,25 +13,24 @@
     <link rel="stylesheet" href="style/listadopedidos.css">
     
 <%LinkedList<Pedido> pedidos = (LinkedList<Pedido>)request.getAttribute("pedidos"); %>
+
+
     <title>Foodtruck</title>
 </head>
 <body>
   <jsp:include page="header.jsp"/>
-<h1>Pedidos Con Delivery</h1>
-
+    <h1>Pedidos</h1>
+    
 <main>
         <div class = "pedidos">
         
         <% for(Pedido pedido : pedidos){ %>
         
         <%if (pedido.getEstado().equals("En preparación")){ %>
-        
-     
-            
+
             <div class="pedido">
                 <div class="pedido__header">
-                    <div class="nro"><%= pedido.getId() %></div>
-                    <p><%= pedido.getCliente().getNombre() %></p>
+                    <div class="nro"><%=pedido.getId()%></div>      
                 </div>
                 <div class="pedido__content">
                     <div class="lineas">
@@ -66,7 +65,12 @@
                     </div>
                     
                 </div>
+                
+                <% if(pedido.getTipoPedido().equals("Delivery")){ %>
                 <a href="entregarpedido?nro=<%=pedido.getId() %>" class="button">Entregar</a>
+                <% } else { %>
+                <a href="entregarpedido?nro=<%=pedido.getId() %>" class="button">En camino</a>
+ 				<%} %>
             </div>
  			<% }} %>
             

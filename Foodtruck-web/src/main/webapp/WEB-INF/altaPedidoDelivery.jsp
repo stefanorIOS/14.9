@@ -11,9 +11,9 @@
 <body>
    <jsp:include page="header.jsp"/>
 	<div class="form">
-        <form action="AltaBusqueda" method="POST" >
+        <form action="altapedidodelivery" method="POST" >
             <div class="form__container">
-                <h1>Buscar Cliente </h1>
+                <h1>Datos del cliente</h1>
                 
                 <div class="form__item">
                     <label>Nombre</label>
@@ -27,11 +27,11 @@
                 </div>
                 
                 <div class="form__item">
-                    <label>direccion</label>
+                    <label>Dirección</label>
                     <input name="direccion">
                 </div>
               
-                 <button class="button" type="submit">Buscar</button>
+                 <button class="button" type="submit">Confirmar</button>
                </div>
                </div>
         </form>

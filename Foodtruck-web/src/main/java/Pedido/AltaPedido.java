@@ -73,11 +73,10 @@ public class AltaPedido extends HttpServlet {
 		
 		
 		if(servicio.equalsIgnoreCase("delivery")) {
-			p.setEstado("En preparación");
+			
 			p.setTipoPedido("Delivery");
-			p.setEmpleado(e);
 			session.setAttribute("pedido", p);
-		request.getRequestDispatcher("WEB-INF/buscarCliente.jsp").forward(request, response);	
+		request.getRequestDispatcher("WEB-INF/altaPedidoDelivery.jsp").forward(request, response);	
 		
 		
 		} else {
