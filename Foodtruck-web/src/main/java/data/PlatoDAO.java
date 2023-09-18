@@ -113,7 +113,7 @@ public void delPlato(Plato delPlato) {
 
 ////////////////////
 
-public void updateBebida(Plato updPlato) {
+public void updatePlato(Plato updPlato) {
 	PreparedStatement stmt = null;
 	try {
 		stmt = DbConnector.getInstancia().getConn()

@@ -132,4 +132,23 @@ main{
     cursor: pointer;
 }
 
+.entregar{
+    background-color: #F0C38E;
+    color:#312C51;
+    font-weight: 500;
+    font-family: Roboto;
+    border-radius: 1.25rem;
+    margin:auto;
+    margin-bottom: 0;
+    padding: 0.6rem 2.2rem;
+    border: 0;
+}
+
+.entregar:hover{
+    background-color: #f0bc82;
+    transition: 1s;
+    cursor: pointer;
+    
+}
+
 

@@ -80,7 +80,7 @@
 
                         <div class="cantidad__container">
                             <i class="fa-solid fa-minus"></i>
-                            <input class="cantidad" name="cantidad"type="number" value="1" id="<%=b.getNombre() %>readonly="readonly"" />
+                            <input class="cantidad" name="cantidad"type="number" value="1" id="<%=b.getNombre() %>" readonly />
                             <i class="fa-solid fa-plus"></i>
                         </div>
                 		

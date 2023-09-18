@@ -62,7 +62,7 @@ public class IniciarPedido extends HttpServlet {
 		
 		if (checkboxplato != null) {
 			for (String valor : checkboxplato) {
-				System.out.println(valor);
+				
 				Plato p = new Plato();
 				p.setId(Integer.parseInt(valor));
 				p = pdao.getPlato(p);
@@ -77,7 +77,8 @@ public class IniciarPedido extends HttpServlet {
 		
 		if (checkboxbebida != null) {
 			for (String valor1 : checkboxbebida) {
-			System.out.println(valor1);
+			
+				
 			Bebida b = new Bebida();
 			b.setId(Integer.parseInt(valor1));
 			b = bdao.getBebida(b);

@@ -60,9 +60,9 @@
 				<input type="checkbox" name="checkboxplato" value="<%=plato.getId()%>" id="<%=plato.getNombre()%>">
 			<%} %>
 			
-			<% for (Bebida bebida : bebidas){ %>
-				<label><%=bebida.getNombre()%></label>
-				<input type="checkbox" name="checkboxbebida" value="<%=bebida.getId()%>" id="<%=bebida.getNombre()%>">
+			<% for (Bebida b : bebidas){ %>
+				<label><%=b.getNombre()%></label>
+				<input type="checkbox" name="checkboxbebida" value="<%=b.getId()%>" id="<%=b.getNombre()%>">
 			<%} %>
             
             

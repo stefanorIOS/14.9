@@ -35,7 +35,7 @@
 			<tbody>
 			<% for (Plato p : lp){ %>
 				<tr>
-					<td><img src="<%=p.getFoto() %>" width="50" height="50"/></td>
+					<td><img src="<%=p.getFoto()%>" width="50" height="50"/></td>
 					<td><%=p.getNombre()%></td>
 					<td><%=p.getPrecio()%></td>
 					<td><%=p.getDescripcion()%></td>

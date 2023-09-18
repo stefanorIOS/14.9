@@ -59,7 +59,6 @@ public class AltaPedido extends HttpServlet {
 				
 			lp.setCantidad(Integer.parseInt(cantidades[i]));
 			p.addLineaPedido(lp);
-			System.out.println("La cantidad del item " + i + " es " + cantidades[i]);
 			i++;
 		}
 			
@@ -76,7 +75,9 @@ public class AltaPedido extends HttpServlet {
 			
 			p.setTipoPedido("Delivery");
 			session.setAttribute("pedido", p);
-		request.getRequestDispatcher("WEB-INF/altaPedidoDelivery.jsp").forward(request, response);	
+			
+			request.getRequestDispatcher("WEB-INF/altaPedidoDelivery.jsp").forward(request, response);
+	
 		
 		
 		} else {

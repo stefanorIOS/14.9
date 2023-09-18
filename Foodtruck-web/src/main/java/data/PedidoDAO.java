@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.LinkedList;
 import java.sql.Timestamp;
 
+import entities.Bebida;
 import entities.Cliente;
 import entities.Empleado;
 import entities.LineaPedido;
@@ -42,6 +43,12 @@ public class PedidoDAO {
 					p.setFechaHora(rs.getTimestamp("fechaHoraPedido"));
 					String dniEmpleado = rs.getString("dniEmpleado");
 					String dniCliente = rs.getString("dniCliente");
+					c.setDni(dniCliente);
+					
+					if (dniCliente != null) {
+						ClienteDAO cdao = new ClienteDAO();
+						c = cdao.getCliente(c);
+					}
 					
 					e.setDni(dniEmpleado);
 					c.setDni(dniCliente);
@@ -146,7 +153,7 @@ public class PedidoDAO {
 		ResultSet keyRS=null;
 		try {
 			stmt = DbConnector.getInstancia().getConn()
-					.prepareStatement("INSERT INTO Pedido (estadoPedido, tipoPedido, dniEmpleado, dniCliente) VALUES (?,?,?,?)",
+					.prepareStatement("INSERT INTO Pedido (estadoPedido, tipoPedido, dniEmpleado, dniCliente,total) VALUES (?,?,?,?,?)",
 							Statement.RETURN_GENERATED_KEYS);
 
 			stmt.setString(1,p.getEstado());
@@ -158,6 +165,8 @@ public class PedidoDAO {
 			} else {
 				stmt.setString(4, null);
 			}
+			
+			stmt.setFloat(5, p.getTotal());
 			
 			
 			
@@ -186,12 +195,29 @@ public class PedidoDAO {
 					
 				}
 				
-				//a terminar, solo me falta esto
+				else {
+					
+					if(lp.getProducto() instanceof Bebida ) {
+						
+						stmt = DbConnector.getInstancia().getConn()
+								.prepareStatement("INSERT INTO pedido_bebida (idPedido,idBebida,fechaHoraPedido,cantidad) VALUES (?,?,?,?)");
+						
+						Bebida b = (Bebida) lp.getProducto();
+						
+						stmt.setInt(1, p.getId());
+						stmt.setInt(2, b.getId());
+						Timestamp hora = this.getPedido(p).getFechaHora();
+						stmt.setTimestamp(3, hora);
+						stmt.setInt(4, lp.getCantidad());
+				}
 	
 
-				stmt.executeUpdate();
+				
 			}
 
+				stmt.executeUpdate();
+				
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

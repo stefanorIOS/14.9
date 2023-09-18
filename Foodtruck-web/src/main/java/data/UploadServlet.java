@@ -1,13 +1,4 @@
-package Plato;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.LinkedList;
-import java.util.Random;
+package data;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -15,46 +6,43 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.File;
 import javax.servlet.http.Part;
-
-import data.PlatoDAO;
 
 import entities.Plato;
 
 /**
- * Servlet implementation class AltaPlato
+ * Servlet implementation class UploadServlet
  */
-@WebServlet("/altaplato")
+
+@WebServlet("/UploadServlet")
 @MultipartConfig(fileSizeThreshold=1024*1024*10, 	// 10 MB 
-maxFileSize=1024*1024*50,      	// 50 MB
-maxRequestSize=1024*1024*100)   	// 100 MB
-public class AltaPlato extends HttpServlet {
+	maxFileSize=1024*1024*50,      	// 50 MB
+	maxRequestSize=1024*1024*100)   	// 100 MB
+public class UploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
+       
 	private static final String UPLOAD_DIR = "uploads";
 	
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AltaPlato() {
+    public UploadServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.getRequestDispatcher("WEB-INF/altaPlato.jsp").forward(request, response);
-		
+		// TODO Auto-generated method stub
+		request.getRequestDispatcher("WEB-INF/altaPlato.html").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//getInfoByForm
+		 String nombre = request.getParameter("nombre");
+		 float precio = Float.parseFloat(request.getParameter("precio"));
+		 String descripcion = request.getParameter("descripcion");
+		 Plato p = new Plato(nombre,precio,descripcion);
+	        
+		
         // gets absolute path of the web application
         String applicationPath = request.getServletContext().getRealPath("");
         // constructs path of the directory to save uploaded file
@@ -73,19 +61,20 @@ public class AltaPlato extends HttpServlet {
             part.write(uploadFilePath + File.separator + fileName);
         }
         
-        String nombre = request.getParameter("nombre");
-		float precio = Float.parseFloat(request.getParameter("precio"));
-		String descripcion = request.getParameter("descripcion");
-		Plato p = new Plato(nombre,precio,descripcion);
+        
         p.setFoto(UPLOAD_DIR+File.separator +fileName);
         PlatoDAO pdao = new PlatoDAO();
         pdao.newPlato(p);
-        request.getRequestDispatcher("WEB-INF/listadoPlatos.jsp").forward(request, response);
+        System.out.println("deberia guardarlo en bd");
+       // request.getRequestDispatcher("WEB-INF/listadoPlatos").forward(request, response);
  
-       // request.setAttribute("message", fileName + " File uploaded successfully!");
-       // request.setAttribute("img", UPLOAD_DIR+File.separator +fileName);
-       // getServletContext().getRequestDispatcher("/WEB-INF/response.jsp").forward(
-                //request, response);
+        /*
+        request.setAttribute("message", fileName + " File uploaded successfully!");
+        request.setAttribute("img", UPLOAD_DIR+File.separator +fileName);
+        getServletContext().getRequestDispatcher("/WEB-INF/response.jsp").forward(
+                request, response);
+        */
+        
 	}
 	
     private String getFileName(Part part) {
@@ -99,8 +88,5 @@ public class AltaPlato extends HttpServlet {
         }
         return "";
     }
-	
-	
-	
 
 }

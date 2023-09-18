@@ -85,7 +85,7 @@ public class EditPlato extends HttpServlet {
 		}
 		
 		PlatoDAO pdao = new PlatoDAO();
-		pdao.updateBebida(plato);
+		pdao.updatePlato(plato);
 		response.sendRedirect("listadoplato");
 
 
